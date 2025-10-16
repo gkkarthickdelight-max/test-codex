@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordan Patel · Senior Software Engineer</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: radial-gradient(120% 120% at 50% 0%, #0b1026 0%, #05060f 38%, #010207 100%);
+      --surface: rgba(13, 20, 41, 0.65);
+      --surface-light: rgba(255, 255, 255, 0.04);
+      --text: #f6f7ff;
+      --muted: #9fa6d9;
+      --accent: #6d6bff;
+      --accent-strong: #8e8cff;
+      --accent-glow: rgba(109, 107, 255, 0.35);
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 18px 50px -25px rgba(15, 18, 36, 0.9);
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max-width: min(1080px, calc(100vw - 3rem));
+      --transition: 240ms cubic-bezier(0.19, 1, 0.22, 1);
+      font-family: "Inter", "SF Pro Display", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    ::selection {
+      background-color: rgba(143, 140, 255, 0.3);
+      color: var(--text);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(5, 6, 15, 0.78) 0%, rgba(5, 6, 15, 0.42) 100%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3.5rem 0 2.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      position: relative;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color var(--transition), transform var(--transition);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: var(--accent-glow);
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: -1;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    nav a.active {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    nav a.active::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 0 6rem;
+      display: grid;
+      gap: 3.5rem;
+    }
+
+    section {
+      position: relative;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: -60% -40% auto;
+      height: 50%;
+      background: radial-gradient(circle, rgba(109, 107, 255, 0.18) 0%, rgba(109, 107, 255, 0) 60%);
+      opacity: 0;
+      transition: opacity var(--transition), transform var(--transition);
+      transform: translateY(18px);
+    }
+
+    section:focus-within::before,
+    section:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h2 {
+      font-size: clamp(1.35rem, 1.2rem + 0.8vw, 1.8rem);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 1.6rem + 2vw, 3.6rem);
+      margin: 0;
+      line-height: 1.08;
+    }
+
+    h2,
+    h3 {
+      font-family: "Space Grotesk", "Inter", sans-serif;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 0;
+    }
+
+    p,
+    li,
+    blockquote {
+      color: rgba(245, 246, 255, 0.92);
+      max-width: 72ch;
+    }
+
+    ul {
+      padding-left: 1.25rem;
+      margin: 0;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    article + article {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(13, 20, 41, 0.45));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    blockquote::before {
+      content: "\201C";
+      position: absolute;
+      top: -20px;
+      left: 16px;
+      font-size: 6rem;
+      color: rgba(109, 107, 255, 0.16);
+    }
+
+    blockquote + blockquote {
+      margin-top: 1.5rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+      transition: color var(--transition), text-decoration-color var(--transition);
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--accent-strong);
+      text-decoration-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.5rem 0;
+    }
+
+    .badge {
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: var(--surface-light);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .badge:hover,
+    .badge:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.18);
+      color: var(--text);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.75rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(109, 107, 255, 0.95), rgba(138, 120, 255, 0.82));
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 12px 30px -12px rgba(109, 107, 255, 0.65);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .cta:hover,
+    .cta:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 45px -15px rgba(109, 107, 255, 0.85);
+    }
+
+    footer {
+      max-width: var(--max-width);
+      margin: 3rem auto 2rem;
+      padding: 1.8rem 0 3rem;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .progress-bar {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(109, 107, 255, 0.9), rgba(173, 171, 255, 0.9));
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 80ms linear;
+      z-index: 20;
+    }
+
+    #back-to-top {
+      position: fixed;
+      right: 2rem;
+      bottom: 2rem;
+      border: none;
+      border-radius: 50%;
+      width: 3.25rem;
+      height: 3.25rem;
+      background: rgba(12, 16, 34, 0.72);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), transform var(--transition), background var(--transition);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    #back-to-top:hover,
+    #back-to-top:focus-visible {
+      transform: translateY(-4px);
+      background: rgba(109, 107, 255, 0.8);
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+
+      section {
+        padding: 2rem;
+      }
+
+      nav {
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" aria-hidden="true"></div>
+  <header>
+    <div class="hero">
+      <div>
+        <h1>Jordan Patel</h1>
+        <p>Senior Software Engineer crafting resilient, human-centered systems.</p>
+        <div class="badge-row" aria-label="Areas of focus">
+          <span class="badge">Distributed Systems</span>
+          <span class="badge">Team Leadership</span>
+          <span class="badge">Platform Strategy</span>
+          <span class="badge">SRE &amp; Reliability</span>
+        </div>
+        <a class="cta" href="#contact">Let&apos;s build together</a>
+      </div>
+      <nav aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#speaking">Speaking</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" tabindex="-1">
+      <h2>About</h2>
+      <p>I lead cross-functional engineering teams to deliver secure, scalable platforms that delight users. With over a decade of experience across fintech, healthcare, and developer tooling, I focus on pairing thoughtful architecture with compassionate leadership.</p>
+      <p>My work blends technical rigor with curiosity. I mentor engineers, shape product strategy, and ensure we ship quality software that meets regulatory and business requirements.</p>
+    </section>
+
+    <section id="experience" tabindex="-1">
+      <h2>Experience</h2>
+      <article>
+        <h3>Principal Engineer · Aurora Labs · 2021 &ndash; Present</h3>
+        <ul>
+          <li>Led the design of a multi-tenant platform serving 4M monthly active users with 99.99% uptime.</li>
+          <li>Architected zero-downtime deployment pipeline and observability stack adopted across the organization.</li>
+          <li>Mentored 12 engineers, promoted 5 to senior roles, and instituted an inclusive code review culture.</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Senior Software Engineer · Bluebridge Health · 2017 &ndash; 2021</h3>
+        <ul>
+          <li>Shipped FDA-compliant telehealth platform enabling 15k daily virtual visits during peak demand.</li>
+          <li>Introduced feature flag system that reduced release risk and shortened rollback time by 80%.</li>
+          <li>Collaborated with product and clinical teams to define HIPAA-aware data governance practices.</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Software Engineer · Finch Financial · 2013 &ndash; 2017</h3>
+        <ul>
+          <li>Built real-time fraud detection services using event-driven architecture and probabilistic modeling.</li>
+          <li>Implemented developer experience improvements that cut onboarding time from 6 weeks to 10 days.</li>
+          <li>Co-led disaster recovery planning that passed SOC 2 Type II audits for 3 consecutive years.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="projects" tabindex="-1">
+      <h2>Selected Projects</h2>
+      <article>
+        <h3>Unified Notifications Platform</h3>
+        <p>Consolidated messaging across email, SMS, push, and in-app channels. Delivered a flexible routing engine with content localization, resulting in 30% higher engagement and millions in retained revenue.</p>
+      </article>
+      <article>
+        <h3>Privacy-First Analytics SDK</h3>
+        <p>Created a drop-in analytics SDK with automatic consent handling and on-device aggregation, enabling customers to gather actionable insights while meeting GDPR and CCPA requirements.</p>
+      </article>
+      <article>
+        <h3>Developer Excellence Program</h3>
+        <p>Designed a mentorship and guild structure that aligned engineers around quality and experimentation, boosting deployment frequency 3× and reducing incident volume 45% year over year.</p>
+      </article>
+    </section>
+
+    <section id="skills" tabindex="-1">
+      <h2>Expertise</h2>
+      <ul>
+        <li>Architecture: Distributed systems, event-driven design, domain-driven development, cloud-native patterns</li>
+        <li>Languages: Go, TypeScript, Rust, Python, Kotlin</li>
+        <li>Leadership: Org design, roadmap planning, inclusive hiring, mentoring, incident management</li>
+        <li>Practices: Observability, SRE, security reviews, compliance automation, accessibility</li>
+      </ul>
+    </section>
+
+    <section id="speaking" tabindex="-1">
+      <h2>Speaking &amp; Writing</h2>
+      <ul>
+        <li>Keynote &ldquo;Designing for Resilience&rdquo; at ScaleConf 2023</li>
+        <li>&ldquo;Leading with Metrics without Losing Empathy&rdquo; &mdash; LeadDev Magazine</li>
+        <li>Podcast guest on &ldquo;Engineering Enablement&rdquo; discussing healthy on-call cultures</li>
+      </ul>
+    </section>
+
+    <section id="testimonials" tabindex="-1">
+      <h2>Testimonials</h2>
+      <blockquote>
+        <p>&ldquo;Jordan pairs remarkable technical depth with a genuine ability to empower teams. Our platform would not be where it is without their leadership.&rdquo;</p>
+        <cite>&mdash; Maya Chen, VP of Engineering, Aurora Labs</cite>
+      </blockquote>
+      <blockquote>
+        <p>&ldquo;In every crisis, Jordan brings calm, clarity, and decisive action. They built processes that made us measurably better engineers.&rdquo;</p>
+        <cite>&mdash; Priya Ramanathan, Director of Engineering, Bluebridge Health</cite>
+      </blockquote>
+    </section>
+
+    <section id="contact" tabindex="-1">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:jordan@patel.dev">jordan@patel.dev</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/jordanpatel">linkedin.com/in/jordanpatel</a></p>
+      <p>GitHub: <a href="https://github.com/jordanpatel">github.com/jordanpatel</a></p>
+    </section>
+  </main>
+
+  <button id="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+  <footer>
+    <p>&copy; <span>2024</span> Jordan Patel. Crafted with gratitude for the teams and communities who make this work possible.</p>
+  </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = Array.from(document.querySelectorAll('main section'));
+    const progressBar = document.querySelector('.progress-bar');
+    const backToTop = document.getElementById('back-to-top');
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const matchingLink = document.querySelector(`nav a[href="#${id}"]`);
+          if (!matchingLink) return;
+
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            matchingLink.classList.add('active');
+            history.replaceState(null, '', `#${id}`);
+          }
+        });
+      },
+      { rootMargin: '-55% 0px -35% 0px', threshold: 0.1 }
+    );
+
+    sections.forEach(section => observer.observe(section));
+
+    const updateProgress = () => {
+      const scrolled = window.scrollY;
+      const height = document.body.scrollHeight - window.innerHeight;
+      const progress = height > 0 ? scrolled / height : 0;
+      progressBar.style.transform = `scaleX(${progress})`;
+      if (scrolled > window.innerHeight * 0.4) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
